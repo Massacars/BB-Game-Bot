@@ -142,7 +142,8 @@ module.exports = (bot, config, db, array_rand, sleep) => {
 
     bot.onText(/\/bbgame/, async (msg, match) => {
         const msgId = msg.message_id;
-        const chatId = msg.chat.id;        
+        const chatId = msg.chat.id;  
+        const random = require('random');      
         if (msg.chat.type === 'group' || msg.chat.type === 'supergroup') {
             const chatObj = await db.collection('chats').findOne({ _id: chatId });
             if (chatObj) {
@@ -165,12 +166,19 @@ module.exports = (bot, config, db, array_rand, sleep) => {
                             winnersFirstArr.forEach(async (id) => {
                                 winnerString = winnerString + '[' + id.first_name + '](tg://user?id=' + id._id + ')\n';
                             });
+                            
+                            let modePhrasesArrLenght = 3;
+                            let randFirst = random.int(0 , modePhrasesArrLenght);
+                            let randSecond = random.int(0 , modePhrasesArrLenght);
+                            let randThird = random.int(0 , modePhrasesArrLenght);
+                            let randFourth = random.int(0 , modePhrasesArrLenght);
+                            let randFifth = random.int(0 , modePhrasesArrLenght);
 
-                            await bot.sendMessage(chatId, modePhrasesArr[mode - 1].stage[1], sleep.sleep(config.settings.stage.first.delayMessage));
-                            await bot.sendMessage(chatId, modePhrasesArr[mode - 1].stage[2], sleep.sleep(config.settings.stage.first.delayMessage));
-                            await bot.sendMessage(chatId, modePhrasesArr[mode - 1].stage[3] + '\n' + winnerString, { parse_mode: 'markdown' }, sleep.sleep(config.settings.stage.first.delayWinners));
-                            await bot.sendMessage(chatId, modePhrasesArr[mode - 1].stage[4], sleep.sleep(config.settings.stage.second.delayMessage));
-                            await bot.sendMessage(chatId, modePhrasesArr[mode - 1].stage[5] + '\n' +  winner[0].first_name + ' ' + winner[0].username , { parse_mode: 'HTML' }, sleep.sleep(config.settings.stage.second.delayWinners));
+                            await bot.sendMessage(chatId, modePhrasesArr[mode - 1].stage[1][randFirst], sleep.sleep(config.settings.stage.first.delayMessage));
+                            await bot.sendMessage(chatId, modePhrasesArr[mode - 1].stage[2][randSecond], sleep.sleep(config.settings.stage.first.delayMessage));
+                            await bot.sendMessage(chatId, modePhrasesArr[mode - 1].stage[3][randThird] + '\n' + winnerString, { parse_mode: 'markdown' }, sleep.sleep(config.settings.stage.first.delayWinners));
+                            await bot.sendMessage(chatId, modePhrasesArr[mode - 1].stage[4][randFourth], sleep.sleep(config.settings.stage.second.delayMessage));
+                            await bot.sendMessage(chatId, modePhrasesArr[mode - 1].stage[5][randFifth] + '\n' +  winner[0].first_name + ' ' + winner[0].username , { parse_mode: 'HTML' }, sleep.sleep(config.settings.stage.second.delayWinners));
                             
                             const winnerObj = await db.collection('users').findOne({ _id: winner[0]._id });
                             winnerObj.points.bbgame = winnerObj.points.bbgame + 1;
