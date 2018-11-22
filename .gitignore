@@ -2,3 +2,4 @@
 config/local.json
 package-lock.json
 .vscode/
+.eslintrc.json

@@ -1,8 +1,8 @@
 {
     "modes": {
-        "1": "Бидло мод",
-        "2": "Алко мод",
-        "3": "Відро мод"
+        "1": "🐮 Бидло мод",
+        "2": "🍻 Алко мод",
+        "3": "🌚 Відро мод"
     },
     "modeAwards": {
         "1": {            
@@ -39,22 +39,30 @@
             }            
         }
     },
-    "settings": {
-        "stage": {
-            "first": {
-                "winners": 2,
-                "delayMessage": 3,
-                "delayWinners": 5
+    "modeSettings": {
+        "1": {
+            "stage": {
+                "1": {
+                    "winners": 0,
+                    "delayMessage": 0                   
+                },                
+                "2": {
+                    "winners": 2,
+                    "delayMessage": 0                    
+                },
+                "3": {
+                    "winners": 0,
+                    "delayMessage": 0                    
+                },                 
+                "4": {
+                    "winners": 1,
+                    "delayMessage": 0                                    
+                }                                  
             },
-            "second": {
-                "winners": 1,
-                "delayMessage": 4,
-                "delayWinners": 6                
-            }                                  
-        },
-        "reset":{
-            "hour": [0,18],
-            "minute": [3]
+            "reset":{
+                "hour": [0,18],
+                "minute": [3]
+            }
         }
     }
 }
